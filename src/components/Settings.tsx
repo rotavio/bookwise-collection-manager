@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { User, Bell, Database, Palette, Download, Upload, Shield, Globe } from 'lucide-react';
+import { User, Bell, Database, Palette, Download, Upload, Shield, Globe, Link, ExternalLink } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -12,6 +11,11 @@ const Settings: React.FC = () => {
     name: 'João Silva',
     email: 'joao.silva@email.com',
     avatar: '',
+    
+    // Goodreads Integration
+    goodreadsConnected: false,
+    goodreadsUsername: '',
+    goodreadsApiKey: '',
     
     // Notification Settings
     emailNotifications: true,
@@ -40,6 +44,27 @@ const Settings: React.FC = () => {
       ...prev,
       [field]: value
     }));
+  };
+
+  const handleGoodreadsConnect = () => {
+    if (settings.goodreadsConnected) {
+      // Desconectar
+      setSettings(prev => ({
+        ...prev,
+        goodreadsConnected: false,
+        goodreadsUsername: '',
+        goodreadsApiKey: ''
+      }));
+    } else {
+      // Simular conexão com Goodreads
+      console.log('Conectando com Goodreads...');
+      // Aqui você implementaria a lógica real de OAuth do Goodreads
+      setSettings(prev => ({
+        ...prev,
+        goodreadsConnected: true,
+        goodreadsUsername: 'usuario_exemplo'
+      }));
+    }
   };
 
   const handleSaveSettings = () => {
@@ -156,6 +181,60 @@ const Settings: React.FC = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Goodreads Integration */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center space-x-2">
+            <Link className="w-5 h-5" />
+            <span>Integração com Goodreads</span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex-1">
+              <h4 className="font-medium">Conectar conta do Goodreads</h4>
+              <p className="text-sm text-slate-600">
+                {settings.goodreadsConnected 
+                  ? `Conectado como @${settings.goodreadsUsername}` 
+                  : 'Conecte sua conta para importar dados e buscar livros automaticamente'
+                }
+              </p>
+            </div>
+            <Button 
+              onClick={handleGoodreadsConnect}
+              variant={settings.goodreadsConnected ? "destructive" : "default"}
+            >
+              {settings.goodreadsConnected ? 'Desconectar' : 'Conectar'}
+              <ExternalLink className="w-4 h-4 ml-2" />
+            </Button>
+          </div>
+
+          {settings.goodreadsConnected && (
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <span className="text-sm font-medium text-green-800">Conta conectada com sucesso!</span>
+              </div>
+              <p className="text-sm text-green-700 mt-1">
+                Agora você pode buscar livros do Goodreads ao adicionar novos títulos à sua biblioteca.
+              </p>
+            </div>
+          )}
+
+          {!settings.goodreadsConnected && (
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <h5 className="font-medium text-blue-900 mb-2">Benefícios da integração:</h5>
+              <ul className="text-sm text-blue-800 space-y-1">
+                <li>• Busca automática de informações dos livros</li>
+                <li>• Preenchimento automático de formulários</li>
+                <li>• Sincronização de avaliações e resenhas</li>
+                <li>• Importação de listas de leitura</li>
+              </ul>
+            </div>
+          )}
+        </CardContent>
+      </Card>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Notifications */}

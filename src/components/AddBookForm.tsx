@@ -1,10 +1,20 @@
-
 import React, { useState } from 'react';
-import { Save, Upload, X, Plus } from 'lucide-react';
+import { Save, Upload, X, Plus, Search } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
+
+interface GoodreadsBook {
+  title: string;
+  author: string;
+  publisher: string;
+  isbn: string;
+  pages: number;
+  publicationDate: string;
+  cover: string;
+  description: string;
+}
 
 const AddBookForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -25,6 +35,10 @@ const AddBookForm: React.FC = () => {
   });
 
   const [newTag, setNewTag] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchResults, setSearchResults] = useState<GoodreadsBook[]>([]);
+  const [showSearch, setShowSearch] = useState(true);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -32,6 +46,54 @@ const AddBookForm: React.FC = () => {
       ...prev,
       [name]: value
     }));
+  };
+
+  const searchGoodreads = async () => {
+    if (!searchQuery.trim()) return;
+    
+    setIsSearching(true);
+    try {
+      // Simulação da API do Goodreads (você precisará implementar a integração real)
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Dados mockados para demonstração
+      const mockResults: GoodreadsBook[] = [
+        {
+          title: searchQuery,
+          author: "Autor Exemplo",
+          publisher: "Editora Exemplo",
+          isbn: "978-0-123456-78-9",
+          pages: 300,
+          publicationDate: "2023-01-01",
+          cover: "https://via.placeholder.com/150x200",
+          description: "Descrição do livro encontrado no Goodreads"
+        }
+      ];
+      
+      setSearchResults(mockResults);
+    } catch (error) {
+      console.error('Erro ao buscar no Goodreads:', error);
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
+  const selectBookFromGoodreads = (book: GoodreadsBook) => {
+    setFormData(prev => ({
+      ...prev,
+      title: book.title,
+      author: book.author,
+      publisher: book.publisher,
+      isbn: book.isbn,
+      pages: book.pages.toString(),
+      publicationDate: book.publicationDate,
+      cover: book.cover,
+      notes: book.description
+    }));
+    
+    setShowSearch(false);
+    setSearchResults([]);
+    setSearchQuery('');
   };
 
   const addTag = () => {
@@ -74,6 +136,64 @@ const AddBookForm: React.FC = () => {
         </div>
       </div>
 
+      {/* Goodreads Search */}
+      {showSearch && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <Search className="w-5 h-5" />
+              <span>Buscar no Goodreads</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex space-x-2">
+              <Input
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Digite o título ou autor do livro"
+                onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), searchGoodreads())}
+              />
+              <Button 
+                type="button" 
+                onClick={searchGoodreads}
+                disabled={isSearching || !searchQuery.trim()}
+              >
+                {isSearching ? 'Buscando...' : 'Buscar'}
+              </Button>
+            </div>
+
+            {searchResults.length > 0 && (
+              <div className="space-y-2">
+                <h4 className="font-medium text-slate-700">Resultados encontrados:</h4>
+                {searchResults.map((book, index) => (
+                  <div key={index} className="flex items-center space-x-4 p-3 border rounded-lg hover:bg-slate-50">
+                    <img src={book.cover} alt={book.title} className="w-12 h-16 object-cover rounded" />
+                    <div className="flex-1">
+                      <h5 className="font-medium">{book.title}</h5>
+                      <p className="text-sm text-slate-600">{book.author}</p>
+                      <p className="text-xs text-slate-500">{book.publisher} • {book.pages} páginas</p>
+                    </div>
+                    <Button size="sm" onClick={() => selectBookFromGoodreads(book)}>
+                      Usar este livro
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="text-center">
+              <Button 
+                type="button" 
+                variant="outline" 
+                onClick={() => setShowSearch(false)}
+              >
+                Preencher manualmente
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main Form */}
         <div className="lg:col-span-2 space-y-6">
@@ -83,6 +203,20 @@ const AddBookForm: React.FC = () => {
               <CardTitle>Informações Básicas</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
+              {!showSearch && (
+                <div className="flex justify-end">
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => setShowSearch(true)}
+                  >
+                    <Search className="w-4 h-4 mr-2" />
+                    Buscar no Goodreads
+                  </Button>
+                </div>
+              )}
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">
@@ -114,7 +248,7 @@ const AddBookForm: React.FC = () => {
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">
                     Editora
-                  </label>
+                  label>
                   <Input
                     name="publisher"
                     value={formData.publisher}
