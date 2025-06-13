@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Save, Upload, X, Plus, Search } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -248,7 +249,7 @@ const AddBookForm: React.FC = () => {
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">
                     Editora
-                  label>
+                  </label>
                   <Input
                     name="publisher"
                     value={formData.publisher}
