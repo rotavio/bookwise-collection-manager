@@ -6,8 +6,6 @@ import {
   List, 
   BarChart3, 
   Settings,
-  PanelLeftClose,
-  PanelLeftOpen,
   ChevronDown,
   ChevronRight,
   Heart,
@@ -17,7 +15,6 @@ import { cn } from '@/lib/utils';
 
 interface SidebarProps {
   collapsed: boolean;
-  onToggle: () => void;
   activeSection: string;
   onSectionChange: (section: string) => void;
 }
@@ -40,7 +37,6 @@ const menuItems = [
 
 const Sidebar: React.FC<SidebarProps> = ({ 
   collapsed, 
-  onToggle, 
   activeSection, 
   onSectionChange 
 }) => {
@@ -66,29 +62,9 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <div className={cn(
-      "h-screen bg-slate-900 text-white transition-all duration-300 flex flex-col",
+      "bg-slate-900 text-white transition-all duration-300 flex flex-col flex-shrink-0",
       collapsed ? "w-16" : "w-64"
     )}>
-      {/* Header */}
-      <div className="p-4 border-b border-slate-700 flex items-center justify-between">
-        {!collapsed && (
-          <div className="flex items-center space-x-2">
-            <Book className="w-8 h-8 text-blue-400" />
-            <span className="text-xl font-bold">BookLib</span>
-          </div>
-        )}
-        <button
-          onClick={onToggle}
-          className="p-2 hover:bg-slate-800 rounded-lg transition-colors"
-        >
-          {collapsed ? (
-            <PanelLeftOpen className="w-5 h-5" />
-          ) : (
-            <PanelLeftClose className="w-5 h-5" />
-          )}
-        </button>
-      </div>
-
       {/* Navigation */}
       <nav className="flex-1 p-4">
         <ul className="space-y-2">

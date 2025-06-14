@@ -28,6 +28,10 @@ const Index = () => {
     setActiveSection('settings');
   };
 
+  const handleToggleSidebar = () => {
+    setSidebarCollapsed(!sidebarCollapsed);
+  };
+
   // Component para página "Aguardando chegada"
   const PendingBooks = () => (
     <div className="space-y-6">
@@ -67,20 +71,24 @@ const Index = () => {
   };
 
   return (
-    <div className="flex h-screen bg-slate-50">
-      {/* Sidebar */}
-      <Sidebar
-        collapsed={sidebarCollapsed}
-        onToggle={() => setSidebarCollapsed(!sidebarCollapsed)}
-        activeSection={activeSection}
-        onSectionChange={setActiveSection}
+    <div className="flex flex-col h-screen bg-slate-50">
+      {/* Header */}
+      <Header 
+        onEditProfile={handleEditProfile} 
+        onSettings={handleSettings}
+        onToggleSidebar={handleToggleSidebar}
+        sidebarCollapsed={sidebarCollapsed}
       />
 
-      {/* Main Content */}
-      <div className="flex-1 overflow-hidden flex flex-col">
-        {/* Header */}
-        <Header onEditProfile={handleEditProfile} onSettings={handleSettings} />
-        
+      {/* Main Content Area */}
+      <div className="flex flex-1 overflow-hidden">
+        {/* Sidebar */}
+        <Sidebar
+          collapsed={sidebarCollapsed}
+          activeSection={activeSection}
+          onSectionChange={setActiveSection}
+        />
+
         {/* Content */}
         <div className="flex-1 overflow-y-auto">
           <div className="p-8">
