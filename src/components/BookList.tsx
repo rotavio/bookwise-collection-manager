@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Search, Filter, Grid, List, Star, Clock, BookOpen, Plus } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -175,8 +174,8 @@ const BookList: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex justify-between items-center">
-        <div className="flex items-center space-x-4">
+      <div className="flex justify-between items-start">
+        <div className="flex items-start space-x-4">
           <div>
             <h1 className="text-3xl font-bold text-slate-900">Minha Biblioteca</h1>
             <p className="text-slate-600 mt-1">{filteredBooks.length} livros encontrados</p>
