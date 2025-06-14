@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import PublicHome from "./pages/PublicHome";
+import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ResetPassword from "./pages/ResetPassword";
@@ -22,8 +22,8 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          {/* Página inicial pública */}
-          <Route path="/home" element={<PublicHome />} />
+          {/* Landing page como página inicial */}
+          <Route path="/" element={<LandingPage />} />
 
           {/* Fluxo de autenticação */}
           <Route element={<AuthLayout />}>
@@ -33,13 +33,14 @@ const App = () => (
           </Route>
 
           {/* Dashboard principal protegida */}
-          <Route path="/" element={
+          <Route path="/dashboard" element={
             <ProtectedRoute>
               <Index />
             </ProtectedRoute>
           } />
 
           {/* Rotas antigas e fallback */}
+          <Route path="/home" element={<LandingPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

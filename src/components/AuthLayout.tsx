@@ -10,10 +10,10 @@ const AuthLayout = () => {
   useEffect(() => {
     let active = true;
     supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session && active) navigate("/", { replace: true });
+      if (session && active) navigate("/dashboard", { replace: true });
     });
     const { data } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session && active) navigate("/", { replace: true });
+      if (session && active) navigate("/dashboard", { replace: true });
     });
     return () => { active = false; data.subscription.unsubscribe(); };
   }, [navigate]);
