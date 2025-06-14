@@ -1,10 +1,10 @@
 
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 
 // Se o usuário estiver logado, redireciona direto para /dashboard
-const AuthLayout = ({ children }: { children: React.ReactNode }) => {
+const AuthLayout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
     return () => { active = false; data.subscription.unsubscribe(); };
   }, [navigate]);
 
-  return <>{children}</>;
+  return <Outlet />;
 };
 
 export default AuthLayout;
