@@ -176,16 +176,18 @@ const BookList: React.FC = () => {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold text-slate-900">Minha Biblioteca</h1>
-          <p className="text-slate-600 mt-1">{filteredBooks.length} livros encontrados</p>
-        </div>
-        
-        <div className="flex items-center space-x-2">
-          <Button className="bg-blue-600 hover:bg-blue-700">
+        <div className="flex items-center space-x-4">
+          <div>
+            <h1 className="text-3xl font-bold text-slate-900">Minha Biblioteca</h1>
+            <p className="text-slate-600 mt-1">{filteredBooks.length} livros encontrados</p>
+          </div>
+          <Button variant="secondary">
             <Plus className="w-4 h-4 mr-2" />
             Adicionar Livro
           </Button>
+        </div>
+        
+        <div className="flex items-center space-x-2">
           <Button
             variant={viewMode === 'grid' ? 'default' : 'outline'}
             size="sm"
