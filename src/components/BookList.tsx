@@ -4,7 +4,11 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
-const BookList: React.FC = () => {
+interface BookListProps {
+  onAddBookClick?: () => void;
+}
+
+const BookList: React.FC<BookListProps> = ({ onAddBookClick }) => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('all');
@@ -180,7 +184,7 @@ const BookList: React.FC = () => {
             <h1 className="text-3xl font-bold text-slate-900">Minha Biblioteca</h1>
             <p className="text-slate-600 mt-1">{filteredBooks.length} livros encontrados</p>
           </div>
-          <Button variant="outline">
+          <Button variant="outline" onClick={onAddBookClick}>
             <Plus className="w-4 h-4 mr-2" />
             Adicionar Livro
           </Button>

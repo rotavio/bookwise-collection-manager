@@ -1,7 +1,9 @@
+
 import React, { useState } from 'react';
 import Sidebar from '@/components/Sidebar';
 import Dashboard from '@/components/Dashboard';
 import BookList from '@/components/BookList';
+import AddBookForm from '@/components/AddBookForm';
 import Wishlist from '@/components/Wishlist';
 import Reports from '@/components/Reports';
 import Settings from '@/components/Settings';
@@ -10,12 +12,18 @@ const Index = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [activeSection, setActiveSection] = useState('dashboard');
 
+  const handleAddBookClick = () => {
+    setActiveSection('add-book');
+  };
+
   const renderContent = () => {
     switch (activeSection) {
       case 'dashboard':
         return <Dashboard />;
       case 'books':
-        return <BookList />;
+        return <BookList onAddBookClick={handleAddBookClick} />;
+      case 'add-book':
+        return <AddBookForm />;
       case 'wishlist':
         return <Wishlist />;
       case 'reports':
