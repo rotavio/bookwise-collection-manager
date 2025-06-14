@@ -8,13 +8,24 @@ import AddBookForm from '@/components/AddBookForm';
 import Wishlist from '@/components/Wishlist';
 import Reports from '@/components/Reports';
 import Settings from '@/components/Settings';
+import Header from '@/components/Header';
+import EditProfileModal from '@/components/EditProfileModal';
 
 const Index = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [activeSection, setActiveSection] = useState('dashboard');
+  const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
 
   const handleAddBookClick = () => {
     setActiveSection('add-book');
+  };
+
+  const handleEditProfile = () => {
+    setIsEditProfileOpen(true);
+  };
+
+  const handleSettings = () => {
+    setActiveSection('settings');
   };
 
   // Component para página "Aguardando chegada"
@@ -66,13 +77,23 @@ const Index = () => {
       />
 
       {/* Main Content */}
-      <div className="flex-1 overflow-hidden">
-        <div className="h-full overflow-y-auto">
+      <div className="flex-1 overflow-hidden flex flex-col">
+        {/* Header */}
+        <Header onEditProfile={handleEditProfile} onSettings={handleSettings} />
+        
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto">
           <div className="p-8">
             {renderContent()}
           </div>
         </div>
       </div>
+
+      {/* Modal de Editar Perfil */}
+      <EditProfileModal 
+        isOpen={isEditProfileOpen} 
+        onClose={() => setIsEditProfileOpen(false)} 
+      />
     </div>
   );
 };
