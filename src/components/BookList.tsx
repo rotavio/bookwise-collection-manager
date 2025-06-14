@@ -181,7 +181,7 @@ const BookList: React.FC = () => {
             <h1 className="text-3xl font-bold text-slate-900">Minha Biblioteca</h1>
             <p className="text-slate-600 mt-1">{filteredBooks.length} livros encontrados</p>
           </div>
-          <Button variant="secondary">
+          <Button variant="outline">
             <Plus className="w-4 h-4 mr-2" />
             Adicionar Livro
           </Button>
