@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -21,7 +20,7 @@ const Login: React.FC = () => {
       toast({ title: "Falha ao entrar", description: error.message, variant: "destructive" });
     } else {
       toast({ title: "Login realizado com sucesso!" });
-      navigate("/dashboard");
+      navigate("/");
     }
   };
 

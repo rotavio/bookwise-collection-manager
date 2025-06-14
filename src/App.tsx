@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,7 +10,6 @@ import PublicHome from "./pages/PublicHome";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ResetPassword from "./pages/ResetPassword";
-import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuthLayout from "./components/AuthLayout";
 
@@ -23,7 +23,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           {/* Página inicial pública */}
-          <Route path="/" element={<PublicHome />} />
+          <Route path="/home" element={<PublicHome />} />
 
           {/* Fluxo de autenticação */}
           <Route element={<AuthLayout />}>
@@ -32,10 +32,10 @@ const App = () => (
             <Route path="/auth/reset" element={<ResetPassword />} />
           </Route>
 
-          {/* Rotas protegidas */}
-          <Route path="/dashboard" element={
+          {/* Dashboard principal protegida */}
+          <Route path="/" element={
             <ProtectedRoute>
-              <Dashboard />
+              <Index />
             </ProtectedRoute>
           } />
 
