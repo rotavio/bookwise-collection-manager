@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { Book } from 'lucide-react';
 import Sidebar from '@/components/Sidebar';
 import Dashboard from '@/components/Dashboard';
 import BookList from '@/components/BookList';
