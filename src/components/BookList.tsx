@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Search, Filter, Grid, List, Star, Clock, BookOpen } from 'lucide-react';
+import { Search, Filter, Grid, List, Star, Clock, BookOpen, Plus } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -182,6 +182,10 @@ const BookList: React.FC = () => {
         </div>
         
         <div className="flex items-center space-x-2">
+          <Button className="bg-blue-600 hover:bg-blue-700">
+            <Plus className="w-4 h-4 mr-2" />
+            Adicionar Livro
+          </Button>
           <Button
             variant={viewMode === 'grid' ? 'default' : 'outline'}
             size="sm"

@@ -1,9 +1,7 @@
-
 import React, { useState } from 'react';
 import Sidebar from '@/components/Sidebar';
 import Dashboard from '@/components/Dashboard';
 import BookList from '@/components/BookList';
-import AddBookForm from '@/components/AddBookForm';
 import Wishlist from '@/components/Wishlist';
 import Reports from '@/components/Reports';
 import Settings from '@/components/Settings';
@@ -18,8 +16,6 @@ const Index = () => {
         return <Dashboard />;
       case 'books':
         return <BookList />;
-      case 'add-book':
-        return <AddBookForm />;
       case 'wishlist':
         return <Wishlist />;
       case 'reports':

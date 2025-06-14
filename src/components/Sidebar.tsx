@@ -1,9 +1,7 @@
-
 import React from 'react';
 import { 
   Home, 
   Book, 
-  Plus, 
   List, 
   BarChart3, 
   Settings,
@@ -22,7 +20,6 @@ interface SidebarProps {
 const menuItems = [
   { id: 'dashboard', label: 'Dashboard', icon: Home },
   { id: 'books', label: 'Meus Livros', icon: Book },
-  { id: 'add-book', label: 'Adicionar Livro', icon: Plus },
   { id: 'wishlist', label: 'Lista de Desejos', icon: List },
   { id: 'reports', label: 'Relatórios', icon: BarChart3 },
   { id: 'settings', label: 'Configurações', icon: Settings },
