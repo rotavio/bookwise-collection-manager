@@ -58,7 +58,7 @@ const AddBookForm: React.FC = () => {
           isbn: "978-0-123456-78-9",
           pages: 300,
           publicationDate: "2023-01-01",
-          cover: "https://via.placeholder.com/150x220",
+          cover: "https://images.unsplash.com/photo-1589998059171-988d887df646?w=200&h=300&fit=crop",
           description: "Esta é uma sinopse de exemplo para o livro encontrado. Ela pode ser longa e descrever os principais pontos da trama, personagens e o universo da história. A integração real com o Goodreads traria a sinopse oficial do livro."
         }
       ];

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Search, Filter, Grid, List, Star, Clock, BookOpen, Plus } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -29,7 +30,7 @@ const BookList: React.FC<BookListProps> = ({ onAddBookClick, onBookSelect }) => 
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('all');
 
-  const books = [
+  const books: Book[] = [
     {
       id: 1,
       title: 'Clean Code: A Handbook of Agile Software Craftsmanship',
