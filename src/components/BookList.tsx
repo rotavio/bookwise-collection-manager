@@ -4,11 +4,27 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
-interface BookListProps {
-  onAddBookClick?: () => void;
+export interface Book {
+  id: number;
+  title: string;
+  author: string;
+  genre: string;
+  status: 'reading' | 'completed' | 'paused' | 'wishlist';
+  rating: number;
+  pages: number;
+  currentPage: number;
+  publishDate: string;
+  publisher: string;
+  cover: string;
+  synopsis?: string;
 }
 
-const BookList: React.FC<BookListProps> = ({ onAddBookClick }) => {
+interface BookListProps {
+  onAddBookClick?: () => void;
+  onBookSelect?: (book: Book) => void;
+}
+
+const BookList: React.FC<BookListProps> = ({ onAddBookClick, onBookSelect }) => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('all');
@@ -130,8 +146,8 @@ const BookList: React.FC<BookListProps> = ({ onAddBookClick }) => {
     ));
   };
 
-  const BookCard = ({ book }: { book: any }) => (
-    <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+  const BookCard = ({ book }: { book: Book }) => (
+    <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => onBookSelect && onBookSelect(book)}>
       <CardContent className="p-6">
         <div className="flex space-x-4">
           <img 

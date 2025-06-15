@@ -1,18 +1,21 @@
+
 import React, { useState } from 'react';
-import { Book } from 'lucide-react';
+import { Book as BookIconLucide } from 'lucide-react';
 import Sidebar from '@/components/Sidebar';
 import Dashboard from '@/components/Dashboard';
-import BookList from '@/components/BookList';
+import BookList, { Book } from '@/components/BookList';
 import AddBookForm from '@/components/AddBookForm';
 import Wishlist from '@/components/Wishlist';
 import Reports from '@/components/Reports';
 import Settings from '@/components/Settings';
 import Header from '@/components/Header';
 import Profile from '@/components/Profile';
+import BookDetail from '@/components/BookDetail';
 
 const Index = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [activeSection, setActiveSection] = useState('dashboard');
+  const [selectedBook, setSelectedBook] = useState<Book | null>(null);
 
   const handleAddBookClick = () => {
     setActiveSection('add-book');
@@ -29,6 +32,15 @@ const Index = () => {
   const handleToggleSidebar = () => {
     setSidebarCollapsed(!sidebarCollapsed);
   };
+  
+  const handleBookSelect = (book: Book) => {
+    setSelectedBook(book);
+  };
+  
+  const handleBackFromDetail = () => {
+    setSelectedBook(null);
+  };
+
 
   // Component para página "Aguardando chegada"
   const PendingBooks = () => (
@@ -39,7 +51,7 @@ const Index = () => {
       </div>
       <div className="text-center py-12">
         <div className="text-slate-400 mb-4">
-          <Book className="w-16 h-16 mx-auto" />
+          <BookIconLucide className="w-16 h-16 mx-auto" />
         </div>
         <h3 className="text-lg font-semibold text-slate-900 mb-2">Nenhum livro aguardando</h3>
         <p className="text-slate-600">Quando você comprar livros, eles aparecerão aqui até chegarem.</p>
@@ -48,13 +60,17 @@ const Index = () => {
   );
 
   const renderContent = () => {
+    if (selectedBook) {
+      return <BookDetail book={selectedBook} onBack={handleBackFromDetail} />;
+    }
+    
     switch (activeSection) {
       case 'dashboard':
         return <Dashboard />;
       case 'profile':
         return <Profile />;
       case 'books':
-        return <BookList onAddBookClick={handleAddBookClick} />;
+        return <BookList onAddBookClick={handleAddBookClick} onBookSelect={handleBookSelect} />;
       case 'add-book':
         return <AddBookForm />;
       case 'wishlist':
