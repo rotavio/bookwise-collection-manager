@@ -148,7 +148,7 @@ const LandingPage = () => {
               <div className="absolute -bottom-8 -left-8 w-64 h-64 bg-gradient-to-br from-pink-200/30 to-blue-200/30 rounded-full blur-3xl"></div>
               
               {/* Floating card elements */}
-              <div className="absolute -top-6 -left-6 bg-white rounded-lg shadow-lg p-4 border border-slate-200 hidden lg:block">
+              <div className="absolute -top-6 -left-6 bg-white rounded-lg shadow-lg p-4 border border-slate-200 hidden lg:block z-20">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
                     <Book className="w-5 h-5 text-blue-600" />
@@ -160,7 +160,7 @@ const LandingPage = () => {
                 </div>
               </div>
               
-              <div className="absolute -bottom-6 -right-6 bg-white rounded-lg shadow-lg p-4 border border-slate-200 hidden lg:block">
+              <div className="absolute -bottom-6 -right-6 bg-white rounded-lg shadow-lg p-4 border border-slate-200 hidden lg:block z-20">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
                     <Trophy className="w-5 h-5 text-green-600" />
