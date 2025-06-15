@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Book, Heart, BarChart3, Search, Bookmark, Trophy, Star, Users, Clock, CheckCircle } from "lucide-react";
 
 const LandingPage = () => {
@@ -86,56 +87,88 @@ const LandingPage = () => {
         </div>
       </header>
 
-      {/* Hero Section */}
+      {/* Hero Section with Image */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5"></div>
-        <div className="max-w-7xl mx-auto text-center relative">
-          <div className="mb-8">
-            <h1 className="text-6xl md:text-7xl font-bold text-slate-900 mb-6 leading-tight">
-              Sua Biblioteca
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 block">
-                Digital Perfeita
-              </span>
-            </h1>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-8">
-              Organize, gerencie e descubra seus livros favoritos em um só lugar. 
-              Uma experiência completa para bibliófilo modernos com tecnologia de ponta.
-            </p>
-          </div>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <Button asChild size="lg" className="px-10 py-4 text-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all duration-300">
-              <Link to="/auth/register">Criar Conta Gratuita</Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="px-10 py-4 text-lg border-2 hover:bg-slate-50 transition-all duration-300">
-              <Link to="/auth/login">Já tenho conta</Link>
-            </Button>
-          </div>
+        <div className="max-w-7xl mx-auto relative">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left side - Content */}
+            <div className="text-center lg:text-left">
+              <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight">
+                Sua Biblioteca
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 block">
+                  Digital Perfeita
+                </span>
+              </h1>
+              <p className="text-xl text-slate-600 max-w-2xl lg:max-w-none mx-auto lg:mx-0 leading-relaxed mb-8">
+                Organize, gerencie e descubra seus livros favoritos em um só lugar. 
+                Uma experiência completa para bibliófilo modernos com tecnologia de ponta.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12">
+                <Button asChild size="lg" className="px-10 py-4 text-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all duration-300">
+                  <Link to="/auth/register">Criar Conta Gratuita</Link>
+                </Button>
+                <Button asChild variant="outline" size="lg" className="px-10 py-4 text-lg border-2 hover:bg-slate-50 transition-all duration-300">
+                  <Link to="/auth/login">Já tenho conta</Link>
+                </Button>
+              </div>
 
-          {/* Stats Section */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <div key={index} className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Icon className="w-8 h-8 text-blue-600" />
+              {/* Stats Section */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                {stats.map((stat, index) => {
+                  const Icon = stat.icon;
+                  return (
+                    <div key={index} className="text-center lg:text-left">
+                      <div className="w-12 h-12 bg-gradient-to-r from-blue-100 to-purple-100 rounded-lg flex items-center justify-center mx-auto lg:mx-0 mb-3">
+                        <Icon className="w-6 h-6 text-blue-600" />
+                      </div>
+                      <div className="text-2xl font-bold text-slate-900 mb-1">{stat.value}</div>
+                      <div className="text-slate-600 text-sm">{stat.label}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Right side - Hero Image */}
+            <div className="relative">
+              <div className="relative z-10">
+                <AspectRatio ratio={4/3} className="rounded-2xl overflow-hidden shadow-2xl">
+                  <img 
+                    src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2028&q=80"
+                    alt="Biblioteca moderna com estantes de livros organizadas"
+                    className="w-full h-full object-cover"
+                  />
+                </AspectRatio>
+              </div>
+              
+              {/* Decorative elements */}
+              <div className="absolute -top-4 -right-4 w-72 h-72 bg-gradient-to-br from-blue-200/30 to-purple-200/30 rounded-full blur-3xl"></div>
+              <div className="absolute -bottom-8 -left-8 w-64 h-64 bg-gradient-to-br from-pink-200/30 to-blue-200/30 rounded-full blur-3xl"></div>
+              
+              {/* Floating card elements */}
+              <div className="absolute -top-6 -left-6 bg-white rounded-lg shadow-lg p-4 border border-slate-200 hidden lg:block">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                    <Book className="w-5 h-5 text-blue-600" />
                   </div>
-                  <div className="text-3xl font-bold text-slate-900 mb-1">{stat.value}</div>
-                  <div className="text-slate-600">{stat.label}</div>
+                  <div>
+                    <div className="text-sm font-semibold text-slate-900">2,847 Livros</div>
+                    <div className="text-xs text-slate-500">Na sua biblioteca</div>
+                  </div>
                 </div>
-              );
-            })}
-          </div>
-
-          {/* Preview Image Placeholder */}
-          <div className="relative max-w-5xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-2xl p-8 border border-slate-200 transform hover:scale-105 transition-transform duration-300">
-              <div className="aspect-video bg-gradient-to-br from-slate-100 via-blue-50 to-purple-50 rounded-xl flex items-center justify-center">
-                <div className="text-center">
-                  <Book className="w-20 h-20 text-blue-500 mx-auto mb-6" />
-                  <p className="text-slate-700 text-xl font-semibold mb-2">Interface do BookLib</p>
-                  <p className="text-slate-500 text-lg">Dashboard interativo para gerenciar sua biblioteca</p>
+              </div>
+              
+              <div className="absolute -bottom-6 -right-6 bg-white rounded-lg shadow-lg p-4 border border-slate-200 hidden lg:block">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                    <Trophy className="w-5 h-5 text-green-600" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-slate-900">Meta Alcançada!</div>
+                    <div className="text-xs text-slate-500">42 livros este ano</div>
+                  </div>
                 </div>
               </div>
             </div>
