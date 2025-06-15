@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Book } from 'lucide-react';
 import Sidebar from '@/components/Sidebar';
@@ -9,19 +8,18 @@ import Wishlist from '@/components/Wishlist';
 import Reports from '@/components/Reports';
 import Settings from '@/components/Settings';
 import Header from '@/components/Header';
-import EditProfileModal from '@/components/EditProfileModal';
+import Profile from '@/components/Profile';
 
 const Index = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [activeSection, setActiveSection] = useState('dashboard');
-  const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
 
   const handleAddBookClick = () => {
     setActiveSection('add-book');
   };
 
-  const handleEditProfile = () => {
-    setIsEditProfileOpen(true);
+  const handleProfileClick = () => {
+    setActiveSection('profile');
   };
 
   const handleSettings = () => {
@@ -53,6 +51,8 @@ const Index = () => {
     switch (activeSection) {
       case 'dashboard':
         return <Dashboard />;
+      case 'profile':
+        return <Profile />;
       case 'books':
         return <BookList onAddBookClick={handleAddBookClick} />;
       case 'add-book':
@@ -74,7 +74,7 @@ const Index = () => {
     <div className="flex flex-col h-screen bg-slate-50">
       {/* Header */}
       <Header 
-        onEditProfile={handleEditProfile} 
+        onProfileClick={handleProfileClick} 
         onSettings={handleSettings}
         onToggleSidebar={handleToggleSidebar}
         sidebarCollapsed={sidebarCollapsed}
@@ -96,12 +96,6 @@ const Index = () => {
           </div>
         </div>
       </div>
-
-      {/* Modal de Editar Perfil */}
-      <EditProfileModal 
-        isOpen={isEditProfileOpen} 
-        onClose={() => setIsEditProfileOpen(false)} 
-      />
     </div>
   );
 };

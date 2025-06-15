@@ -5,14 +5,14 @@ import { Button } from '@/components/ui/button';
 import UserMenu from './UserMenu';
 
 interface HeaderProps {
-  onEditProfile: () => void;
+  onProfileClick: () => void;
   onSettings: () => void;
   onToggleSidebar: () => void;
   sidebarCollapsed: boolean;
 }
 
 const Header: React.FC<HeaderProps> = ({ 
-  onEditProfile, 
+  onProfileClick, 
   onSettings, 
   onToggleSidebar,
   sidebarCollapsed 
@@ -34,7 +34,7 @@ const Header: React.FC<HeaderProps> = ({
             <span className="text-xl font-bold text-slate-900">BookLib</span>
           </div>
         </div>
-        <UserMenu onEditProfile={onEditProfile} onSettings={onSettings} />
+        <UserMenu onProfileClick={onProfileClick} onSettings={onSettings} />
       </div>
     </header>
   );

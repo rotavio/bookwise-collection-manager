@@ -15,11 +15,11 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from '@/components/ui/use-toast';
 
 interface UserMenuProps {
-  onEditProfile: () => void;
+  onProfileClick: () => void;
   onSettings: () => void;
 }
 
-const UserMenu: React.FC<UserMenuProps> = ({ onEditProfile, onSettings }) => {
+const UserMenu: React.FC<UserMenuProps> = ({ onProfileClick, onSettings }) => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -54,9 +54,9 @@ const UserMenu: React.FC<UserMenuProps> = ({ onEditProfile, onSettings }) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
-        <DropdownMenuItem onClick={onEditProfile}>
+        <DropdownMenuItem onClick={onProfileClick}>
           <User className="mr-2 h-4 w-4" />
-          <span>Editar Perfil</span>
+          <span>Meu Perfil</span>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={onSettings}>
           <Settings className="mr-2 h-4 w-4" />
