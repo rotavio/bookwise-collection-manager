@@ -4,13 +4,12 @@ import { Book as BookIconLucide } from 'lucide-react';
 import Sidebar from '@/components/Sidebar';
 import Dashboard from '@/components/Dashboard';
 import BookList, { Book } from '@/components/BookList';
-import AddBookForm from '@/components/AddBookForm';
+import BookForm from '@/components/BookForm';
 import Wishlist from '@/components/Wishlist';
 import Reports from '@/components/Reports';
 import Settings from '@/components/Settings';
 import Header from '@/components/Header';
 import Profile from '@/components/Profile';
-import BookDetail from '@/components/BookDetail';
 
 const Index = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -18,6 +17,7 @@ const Index = () => {
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
 
   const handleAddBookClick = () => {
+    setSelectedBook(null);
     setActiveSection('add-book');
   };
 
@@ -35,14 +35,14 @@ const Index = () => {
   
   const handleBookSelect = (book: Book) => {
     setSelectedBook(book);
+    setActiveSection('books'); // Manter a seção ativa para a navegação da sidebar
   };
   
-  const handleBackFromDetail = () => {
+  const handleBackFromForm = () => {
     setSelectedBook(null);
+    setActiveSection('books');
   };
 
-
-  // Component para página "Aguardando chegada"
   const PendingBooks = () => (
     <div className="space-y-6">
       <div>
@@ -60,8 +60,11 @@ const Index = () => {
   );
 
   const renderContent = () => {
-    if (selectedBook) {
-      return <BookDetail book={selectedBook} onBack={handleBackFromDetail} />;
+    if (activeSection === 'add-book' || selectedBook) {
+      return <BookForm 
+        book={selectedBook} 
+        onBack={handleBackFromForm} 
+      />;
     }
     
     switch (activeSection) {
@@ -72,7 +75,8 @@ const Index = () => {
       case 'books':
         return <BookList onAddBookClick={handleAddBookClick} onBookSelect={handleBookSelect} />;
       case 'add-book':
-        return <AddBookForm />;
+        // Este caso agora é tratado pela condição acima, mas mantemos para clareza
+        return <BookForm book={null} onBack={handleBackFromForm} />;
       case 'wishlist':
         return <Wishlist />;
       case 'pending':
@@ -102,7 +106,10 @@ const Index = () => {
         <Sidebar
           collapsed={sidebarCollapsed}
           activeSection={activeSection}
-          onSectionChange={setActiveSection}
+          onSectionChange={(section) => {
+            setSelectedBook(null); // Limpa o livro selecionado ao mudar de seção
+            setActiveSection(section);
+          }}
         />
 
         {/* Content */}
