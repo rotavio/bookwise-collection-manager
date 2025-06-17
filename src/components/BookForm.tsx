@@ -142,7 +142,7 @@ const BookForm: React.FC<BookFormProps> = ({ book, onBack }) => {
   const pageDescription = book ? (isEditing ? 'Altere as informações de leitura.' : 'Veja os detalhes do seu livro.') : 'Confirme os dados e adicione suas informações de leitura.';
 
   return (
-    <div className="space-y-4 sm:space-y-6">
+    <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-slate-800">{pageTitle}</h1>
@@ -156,29 +156,49 @@ const BookForm: React.FC<BookFormProps> = ({ book, onBack }) => {
         )}
       </div>
 
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6">
-        <div className="xl:col-span-2 space-y-4 sm:space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-8">
+        {/* Seção de Informações do Livro (API - Somente Leitura) */}
+        <div className="space-y-4">
+          <div className="border-l-4 border-blue-500 pl-4">
+            <h2 className="text-xl font-semibold text-slate-800 mb-1">Informações do Livro</h2>
+            <p className="text-sm text-slate-600">Dados obtidos da base de dados</p>
+          </div>
           <BookDetails book={goodreadsBook} />
-          <UserBookDataForm
-            formData={userFormData}
-            onFormChange={handleUserFormChange}
-            onTagsChange={handleTagsChange}
-            isEditing={isEditing}
-          />
         </div>
 
-        <div className="space-y-4 sm:space-y-6">
-          <BookRating
-            rating={userFormData.rating}
-            onRatingChange={handleRatingChange}
-            isEditing={isEditing}
-          />
-          <FormActions 
-            isEditing={isEditing}
-            isNewBook={!book}
-            onCancel={() => setIsEditing(false)}
-            onBack={onBack}
-          />
+        {/* Seção de Dados Pessoais (Editável pelo Usuário) */}
+        <div className="space-y-4">
+          <div className="border-l-4 border-green-500 pl-4">
+            <h2 className="text-xl font-semibold text-slate-800 mb-1">Seus Dados Pessoais</h2>
+            <p className="text-sm text-slate-600">Informações específicas do seu exemplar e opinião</p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Coluna 1: Avaliação */}
+            <div className="space-y-6">
+              <BookRating
+                rating={userFormData.rating}
+                onRatingChange={handleRatingChange}
+                isEditing={isEditing}
+              />
+              <FormActions 
+                isEditing={isEditing}
+                isNewBook={!book}
+                onCancel={() => setIsEditing(false)}
+                onBack={onBack}
+              />
+            </div>
+            
+            {/* Coluna 2 e 3: Formulários */}
+            <div className="lg:col-span-2 space-y-6">
+              <UserBookDataForm
+                formData={userFormData}
+                onFormChange={handleUserFormChange}
+                onTagsChange={handleTagsChange}
+                isEditing={isEditing}
+              />
+            </div>
+          </div>
         </div>
       </form>
     </div>
