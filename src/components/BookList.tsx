@@ -1,24 +1,9 @@
-
 import React, { useState } from 'react';
 import { Search, Filter, Grid, List, Star, Clock, BookOpen, Plus } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-
-export interface Book {
-  id: number;
-  title: string;
-  author: string;
-  genre: string;
-  status: 'reading' | 'completed' | 'paused' | 'wishlist';
-  rating: number;
-  pages: number;
-  currentPage: number;
-  publishDate: string;
-  publisher: string;
-  cover: string;
-  synopsis?: string;
-}
+import { Book } from '@/types/book';
 
 interface BookListProps {
   onAddBookClick?: () => void;
@@ -30,92 +15,183 @@ const BookList: React.FC<BookListProps> = ({ onAddBookClick, onBookSelect }) => 
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('all');
 
+  // Mock data using the global Book type
   const books: Book[] = [
     {
-      id: 1,
+      id: '1',
       title: 'Clean Code: A Handbook of Agile Software Craftsmanship',
       author: 'Robert C. Martin',
-      genre: 'Tecnologia',
-      status: 'reading',
-      rating: 5,
-      pages: 464,
-      currentPage: 302,
-      publishDate: '2008',
+      authors: ['Robert C. Martin'],
+      illustrators: [],
       publisher: 'Prentice Hall',
-      cover: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=200&h=300&fit=crop'
+      publishers: ['Prentice Hall'],
+      isbn: '978-0132350884',
+      pages: 464,
+      recommendedAge: '16+',
+      editions: 1,
+      genres: ['Tecnologia'],
+      publicationDate: '2008',
+      cover: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=200&h=300&fit=crop',
+      description: 'A handbook of agile software craftsmanship',
+      bookRating: 4.5,
+      generalRanking: 1,
+      categoryRanking: [],
+      purchaseDate: '2024-01-15',
+      price: '89.90',
+      store: 'Amazon',
+      status: 'reading',
+      currentPage: 302,
+      rating: 5,
+      notes: '',
+      tags: []
     },
     {
-      id: 2,
+      id: '2',
       title: 'The Pragmatic Programmer',
       author: 'David Thomas, Andrew Hunt',
-      genre: 'Tecnologia',
-      status: 'completed',
-      rating: 5,
-      pages: 352,
-      currentPage: 352,
-      publishDate: '1999',
+      authors: ['David Thomas', 'Andrew Hunt'],
+      illustrators: [],
       publisher: 'Addison-Wesley',
-      cover: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=300&fit=crop'
+      publishers: ['Addison-Wesley'],
+      isbn: '978-0201616224',
+      pages: 352,
+      recommendedAge: '16+',
+      editions: 1,
+      genres: ['Tecnologia'],
+      publicationDate: '1999',
+      cover: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=300&fit=crop',
+      description: 'From journeyman to master',
+      bookRating: 4.6,
+      generalRanking: 2,
+      categoryRanking: [],
+      purchaseDate: '2024-01-10',
+      price: '79.90',
+      store: 'Amazon',
+      status: 'read',
+      currentPage: 352,
+      rating: 5,
+      notes: '',
+      tags: []
     },
     {
-      id: 3,
+      id: '3',
       title: 'Design Patterns: Elements of Reusable Object-Oriented Software',
       author: 'Gang of Four',
-      genre: 'Tecnologia',
-      status: 'paused',
-      rating: 4,
-      pages: 395,
-      currentPage: 158,
-      publishDate: '1994',
+      authors: ['Erich Gamma', 'Richard Helm', 'Ralph Johnson', 'John Vlissides'],
+      illustrators: [],
       publisher: 'Addison-Wesley',
-      cover: 'https://images.unsplash.com/photo-1589998059171-988d887df646?w=200&h=300&fit=crop'
+      publishers: ['Addison-Wesley'],
+      isbn: '978-0201633610',
+      pages: 395,
+      recommendedAge: '18+',
+      editions: 1,
+      genres: ['Tecnologia'],
+      publicationDate: '1994',
+      cover: 'https://images.unsplash.com/photo-1589998059171-988d887df646?w=200&h=300&fit=crop',
+      description: 'Elements of reusable object-oriented software',
+      bookRating: 4.3,
+      generalRanking: 3,
+      categoryRanking: [],
+      purchaseDate: '2024-01-20',
+      price: '99.90',
+      store: 'Amazon',
+      status: 'reading',
+      currentPage: 158,
+      rating: 4,
+      notes: '',
+      tags: []
     },
     {
-      id: 4,
+      id: '4',
       title: 'Sapiens: A Brief History of Humankind',
       author: 'Yuval Noah Harari',
-      genre: 'História',
-      status: 'wishlist',
-      rating: 0,
-      pages: 443,
-      currentPage: 0,
-      publishDate: '2011',
+      authors: ['Yuval Noah Harari'],
+      illustrators: [],
       publisher: 'Harper',
-      cover: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=200&h=300&fit=crop'
+      publishers: ['Harper'],
+      isbn: '978-0062316097',
+      pages: 443,
+      recommendedAge: '16+',
+      editions: 1,
+      genres: ['História'],
+      publicationDate: '2011',
+      cover: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=200&h=300&fit=crop',
+      description: 'A brief history of humankind',
+      bookRating: 4.4,
+      generalRanking: 4,
+      categoryRanking: [],
+      purchaseDate: '',
+      price: '',
+      store: '',
+      status: 'wishlist',
+      currentPage: 0,
+      rating: 0,
+      notes: '',
+      tags: []
     },
     {
-      id: 5,
+      id: '5',
       title: 'Atomic Habits',
       author: 'James Clear',
-      genre: 'Autodesenvolvimento',
-      status: 'completed',
-      rating: 5,
-      pages: 320,
-      currentPage: 320,
-      publishDate: '2018',
+      authors: ['James Clear'],
+      illustrators: [],
       publisher: 'Avery',
-      cover: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=200&h=300&fit=crop'
+      publishers: ['Avery'],
+      isbn: '978-0735211292',
+      pages: 320,
+      recommendedAge: '16+',
+      editions: 1,
+      genres: ['Autodesenvolvimento'],
+      publicationDate: '2018',
+      cover: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=200&h=300&fit=crop',
+      description: 'An easy & proven way to build good habits & break bad ones',
+      bookRating: 4.7,
+      generalRanking: 5,
+      categoryRanking: [],
+      purchaseDate: '2024-01-25',
+      price: '69.90',
+      store: 'Amazon',
+      status: 'read',
+      currentPage: 320,
+      rating: 5,
+      notes: '',
+      tags: []
     },
     {
-      id: 6,
+      id: '6',
       title: 'The Psychology of Money',
       author: 'Morgan Housel',
-      genre: 'Finanças',
-      status: 'reading',
-      rating: 4,
-      pages: 256,
-      currentPage: 89,
-      publishDate: '2020',
+      authors: ['Morgan Housel'],
+      illustrators: [],
       publisher: 'Harriman House',
-      cover: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=200&h=300&fit=crop'
+      publishers: ['Harriman House'],
+      isbn: '978-0857197689',
+      pages: 256,
+      recommendedAge: '16+',
+      editions: 1,
+      genres: ['Finanças'],
+      publicationDate: '2020',
+      cover: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=200&h=300&fit=crop',
+      description: 'Timeless lessons on wealth, greed, and happiness',
+      bookRating: 4.5,
+      generalRanking: 6,
+      categoryRanking: [],
+      purchaseDate: '2024-02-01',
+      price: '59.90',
+      store: 'Amazon',
+      status: 'reading',
+      currentPage: 89,
+      rating: 4,
+      notes: '',
+      tags: []
     }
   ];
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'completed': return 'bg-green-100 text-green-800';
+      case 'read': return 'bg-green-100 text-green-800';
       case 'reading': return 'bg-blue-100 text-blue-800';
-      case 'paused': return 'bg-orange-100 text-orange-800';
+      case 'pending': return 'bg-orange-100 text-orange-800';
       case 'wishlist': return 'bg-purple-100 text-purple-800';
       default: return 'bg-gray-100 text-gray-800';
     }
@@ -123,9 +199,9 @@ const BookList: React.FC<BookListProps> = ({ onAddBookClick, onBookSelect }) => 
 
   const getStatusLabel = (status: string) => {
     switch (status) {
-      case 'completed': return 'Concluído';
+      case 'read': return 'Concluído';
       case 'reading': return 'Lendo';
-      case 'paused': return 'Pausado';
+      case 'pending': return 'Pausado';
       case 'wishlist': return 'Lista de Desejos';
       default: return 'N/A';
     }
@@ -164,7 +240,7 @@ const BookList: React.FC<BookListProps> = ({ onAddBookClick, onBookSelect }) => 
               <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(book.status)}`}>
                 {getStatusLabel(book.status)}
               </span>
-              <span className="text-xs text-slate-500">{book.genre}</span>
+              <span className="text-xs text-slate-500">{book.genres[0] || 'N/A'}</span>
             </div>
 
             {book.rating > 0 && (
@@ -245,8 +321,8 @@ const BookList: React.FC<BookListProps> = ({ onAddBookClick, onBookSelect }) => 
           >
             <option value="all">Todos os Status</option>
             <option value="reading">Lendo</option>
-            <option value="completed">Concluídos</option>
-            <option value="paused">Pausados</option>
+            <option value="read">Concluídos</option>
+            <option value="pending">Pausados</option>
             <option value="wishlist">Lista de Desejos</option>
           </select>
           
