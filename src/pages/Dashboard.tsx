@@ -15,13 +15,14 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-slate-50">
-      <div className="bg-white shadow rounded-lg p-8 max-w-lg w-full text-center">
-        <h1 className="text-2xl font-bold mb-4">Bem-vindo ao BookiLib!</h1>
-        <p className="mb-6">Este é seu painel privado. Você está logado.</p>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-background">
+      <div className="bg-card shadow rounded-lg p-8 max-w-lg w-full text-center border border-border">
+        <h1 className="text-2xl font-bold mb-4 text-foreground">Bem-vindo ao BookLib!</h1>
+        <p className="mb-6 text-muted-foreground">Este é seu painel privado. Você está logado.</p>
         <Button onClick={handleLogout}>Sair</Button>
       </div>
     </div>
   );
 };
+
 export default Dashboard;

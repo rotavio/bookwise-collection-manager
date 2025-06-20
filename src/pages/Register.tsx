@@ -54,15 +54,15 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      <div className="bg-white shadow-xl rounded-lg p-8 max-w-md w-full border border-slate-200">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5">
+      <div className="bg-white shadow-xl rounded-lg p-8 max-w-md w-full border border-border">
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <Book className="w-8 h-8 text-blue-600" />
-            <span className="text-2xl font-bold text-slate-900">BookLib</span>
+            <Book className="w-8 h-8 text-primary" />
+            <span className="text-2xl font-bold text-foreground">BookLib</span>
           </div>
-          <h2 className="text-2xl font-bold text-slate-900">Criar sua conta</h2>
-          <p className="text-slate-600 mt-2">Comece a organizar sua biblioteca hoje</p>
+          <h2 className="text-2xl font-bold text-foreground">Criar sua conta</h2>
+          <p className="text-muted-foreground mt-2">Comece a organizar sua biblioteca hoje</p>
         </div>
 
         {/* Login Social */}
@@ -110,10 +110,10 @@ const Register: React.FC = () => {
         {/* Divisor */}
         <div className="relative mb-6">
           <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t border-slate-200" />
+            <span className="w-full border-t border-border" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-white px-2 text-slate-500">Ou cadastre-se com e-mail</span>
+            <span className="bg-white px-2 text-muted-foreground">Ou cadastre-se com e-mail</span>
           </div>
         </div>
         
@@ -143,12 +143,12 @@ const Register: React.FC = () => {
         </form>
         
         <div className="mt-6 text-center text-sm">
-          <span className="text-slate-600">Já tem uma conta? </span>
-          <Link to="/auth/login" className="text-blue-600 hover:underline">Entrar</Link>
+          <span className="text-muted-foreground">Já tem uma conta? </span>
+          <Link to="/auth/login" className="text-primary hover:underline">Entrar</Link>
         </div>
         
         <div className="mt-4 text-center">
-          <Link to="/" className="text-slate-600 hover:text-slate-900 text-sm">
+          <Link to="/" className="text-muted-foreground hover:text-foreground text-sm">
             ← Voltar para início
           </Link>
         </div>
