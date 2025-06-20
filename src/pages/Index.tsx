@@ -1,15 +1,15 @@
-
 import React, { useState } from 'react';
 import { Book as BookIconLucide } from 'lucide-react';
 import Sidebar from '@/components/Sidebar';
 import Dashboard from '@/components/Dashboard';
-import BookList, { Book } from '@/components/BookList';
+import BookList from '@/components/BookList';
 import BookForm from '@/components/BookForm';
 import Wishlist from '@/components/Wishlist';
 import Reports from '@/components/Reports';
 import Settings from '@/components/Settings';
 import Header from '@/components/Header';
 import Profile from '@/components/Profile';
+import { Book } from '@/types/book';
 
 const Index = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
