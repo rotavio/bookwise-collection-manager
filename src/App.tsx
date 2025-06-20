@@ -11,6 +11,7 @@ import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ResetPassword from "./pages/ResetPassword";
+import ImageGeneration from "./pages/ImageGeneration";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuthLayout from "./components/AuthLayout";
 
@@ -26,6 +27,9 @@ const App = () => (
           <Routes>
             {/* Landing page como página inicial */}
             <Route path="/" element={<LandingPage />} />
+
+            {/* Gerador de imagens */}
+            <Route path="/generate-image" element={<ImageGeneration />} />
 
             {/* Fluxo de autenticação */}
             <Route element={<AuthLayout />}>
