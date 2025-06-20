@@ -36,7 +36,7 @@ export interface UserBookData {
 }
 
 // Interface completa que combina dados da API e do usuário
-export interface Book extends GoodreadsBook, UserBookData {
+export interface Book extends GoodreadsBook, Omit<UserBookData, 'currentPage'> {
   id?: string;
   currentPage: number; // Override para ser number ao invés de string
 }
