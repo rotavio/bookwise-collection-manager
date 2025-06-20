@@ -35,7 +35,7 @@ const Index = () => {
   
   const handleBookSelect = (book: Book) => {
     setSelectedBook(book);
-    setActiveSection('books'); // Manter a seção ativa para a navegação da sidebar
+    setActiveSection('books');
   };
   
   const handleBackFromForm = () => {
@@ -75,7 +75,6 @@ const Index = () => {
       case 'books':
         return <BookList onAddBookClick={handleAddBookClick} onBookSelect={handleBookSelect} />;
       case 'add-book':
-        // Este caso agora é tratado pela condição acima, mas mantemos para clareza
         return <BookForm book={null} onBack={handleBackFromForm} />;
       case 'wishlist':
         return <Wishlist />;
@@ -92,7 +91,6 @@ const Index = () => {
 
   return (
     <div className="flex flex-col h-screen bg-slate-50">
-      {/* Header */}
       <Header 
         onProfileClick={handleProfileClick} 
         onSettings={handleSettings}
@@ -100,19 +98,16 @@ const Index = () => {
         sidebarCollapsed={sidebarCollapsed}
       />
 
-      {/* Main Content Area */}
       <div className="flex flex-1 overflow-hidden">
-        {/* Sidebar */}
         <Sidebar
           collapsed={sidebarCollapsed}
           activeSection={activeSection}
           onSectionChange={(section) => {
-            setSelectedBook(null); // Limpa o livro selecionado ao mudar de seção
+            setSelectedBook(null);
             setActiveSection(section);
           }}
         />
 
-        {/* Content */}
         <div className="flex-1 overflow-y-auto">
           <div className="p-8">
             {renderContent()}

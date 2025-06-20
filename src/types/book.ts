@@ -1,38 +1,9 @@
 
-// Re-exportando o tipo Book de BookList para usá-lo em toda a aplicação
-export interface Book {
-  id: string;
-  title: string;
-  author: string;
-  authors: string[]; // Array de autores
-  illustrators: string[]; // Ilustradores
-  publisher: string;
-  publishers: string[]; // Array de editoras
-  isbn: string;
-  pages: number;
-  recommendedAge: string; // Idade recomendada
-  editions: number; // Número de edições ou volumes
-  genres: string[]; // Gêneros
-  publicationDate: string;
-  publishDate: string; // Manter compatibilidade
-  cover: string;
-  description: string;
-  synopsis?: string; // Manter compatibilidade
-  rating: number; // Nota do usuário (1-5 estrelas)
-  bookRating: number; // Nota geral do livro (1-10)
-  generalRanking: number; // Posição no ranking geral
-  categoryRanking: { category: string; position: number }[]; // Ranking por categoria
-  status: 'wishlist' | 'to-read' | 'reading' | 'paused' | 'completed' | 'abandoned';
-  currentPage: number;
-  // Dados do usuário
-  purchaseDate?: string;
-  price?: string;
-  store?: string;
-  notes?: string;
-  tags?: string[];
+export interface CategoryRanking {
+  category: string;
+  position: number;
 }
 
-// Representa a estrutura de dados de uma resposta da API do Goodreads
 export interface GoodreadsBook {
   title: string;
   author: string;
@@ -50,17 +21,22 @@ export interface GoodreadsBook {
   description: string;
   bookRating: number;
   generalRanking: number;
-  categoryRanking: { category: string; position: number }[];
+  categoryRanking: CategoryRanking[];
 }
 
-// Representa os dados específicos do usuário para um livro
 export interface UserBookData {
-    purchaseDate: string;
-    price: string;
-    store: string;
-    status: Book['status'];
-    currentPage: string;
-    rating: number;
-    notes: string;
-    tags: string[];
+  purchaseDate: string;
+  price: string;
+  store: string;
+  status: 'wishlist' | 'reading' | 'read' | 'pending';
+  currentPage: string;
+  rating: number;
+  notes: string;
+  tags: string[];
+}
+
+// Interface completa que combina dados da API e do usuário
+export interface Book extends GoodreadsBook, UserBookData {
+  id?: string;
+  currentPage: number; // Override para ser number ao invés de string
 }

@@ -3,6 +3,7 @@ import React from 'react';
 import { Book, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import UserMenu from './UserMenu';
+import ColorPaletteSelect from './ColorPaletteSelect';
 
 interface HeaderProps {
   onProfileClick: () => void;
@@ -30,11 +31,15 @@ const Header: React.FC<HeaderProps> = ({
             <Menu className="w-5 h-5" />
           </Button>
           <div className="flex items-center space-x-2">
-            <Book className="w-8 h-8 text-blue-400" />
+            <Book className="w-8 h-8 text-primary" />
             <span className="text-xl font-bold text-slate-900">BookLib</span>
           </div>
         </div>
-        <UserMenu onProfileClick={onProfileClick} onSettings={onSettings} />
+        
+        <div className="flex items-center space-x-4">
+          <ColorPaletteSelect />
+          <UserMenu onProfileClick={onProfileClick} onSettings={onSettings} />
+        </div>
       </div>
     </header>
   );
