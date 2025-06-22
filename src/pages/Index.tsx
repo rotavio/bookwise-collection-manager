@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Book as BookIconLucide } from 'lucide-react';
 import Sidebar from '@/components/Sidebar';
@@ -9,12 +10,15 @@ import Reports from '@/components/Reports';
 import Settings from '@/components/Settings';
 import Header from '@/components/Header';
 import Profile from '@/components/Profile';
+import Onboarding from '@/components/Onboarding';
+import { useOnboarding } from '@/hooks/useOnboarding';
 import { Book } from '@/types/book';
 
 const Index = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [activeSection, setActiveSection] = useState('dashboard');
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
+  const { showOnboarding, isLoading, completeOnboarding } = useOnboarding();
 
   const handleAddBookClick = () => {
     setSelectedBook(null);
@@ -89,6 +93,17 @@ const Index = () => {
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-slate-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-slate-600">Carregando...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col h-screen bg-slate-50">
       <Header 
@@ -114,6 +129,10 @@ const Index = () => {
           </div>
         </div>
       </div>
+
+      {showOnboarding && (
+        <Onboarding onComplete={completeOnboarding} />
+      )}
     </div>
   );
 };
