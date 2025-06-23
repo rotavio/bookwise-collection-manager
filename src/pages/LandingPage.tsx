@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -135,8 +136,8 @@ const LandingPage = () => {
               <div className="relative z-10">
                 <AspectRatio ratio={4/3} className="rounded-2xl overflow-hidden shadow-2xl">
                   <img 
-                    src="/photo-1721322800607-8c38375eef04"
-                    alt="Sala moderna com jogos de tabuleiro organizados"
+                    src="/photo-1649972904349-6e44c42644a7"
+                    alt="Mulher lendo livros em um ambiente aconchegante"
                     className="w-full h-full object-cover"
                   />
                 </AspectRatio>
